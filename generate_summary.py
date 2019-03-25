@@ -11,7 +11,7 @@ dirHash = {}
 curDir = None
 curDirName = None
 
-for info in infos[4:]:
+for info in infos:
     info = info.strip('\n')
     if info.startswith('###'):
         curDir = []
