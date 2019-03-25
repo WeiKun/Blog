@@ -1,7 +1,3 @@
-# Summary
-
-* [Introduction](README.md)
-
 ### Unix
 
 * [Try ksm](unix/2019_03_10_try_ksm.md)
