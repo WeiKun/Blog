@@ -11,7 +11,7 @@ dirHash = {}
 curDir = None
 curDirName = None
 
-for info in infos:
+for info in infos[4:]:
     info = info.strip('\n')
     if info.startswith('###'):
         curDir = []
@@ -21,6 +21,7 @@ for info in infos:
     elif info.startswith('*'):
         name = info[info.find('[') + 1:info.find(']')]
         filePath = info[info.find('(') + 1:info.find(')')]
+        print  name, filePath
         curDir.append((name, filePath))
         if dirHash.get(filePath.split('/')[0], None) == None:
             dirHash[filePath.split('/')[0]] = (curDirName, curDir)
@@ -71,7 +72,7 @@ for maindir, subdir, file_name_list in os.walk('.'):
             curDir.append((name, '%s/%s' % (pathDirName, fileName)))
 
 writeinfos = []
-writeinfos.append('# Summary\n')
+writeinfos.append('### Summary\n')
 writeinfos.append('* [Introduction](README.md)\n')
 for name, curDir in dirs:
     writeinfos.append('### %s\n' % (name))
