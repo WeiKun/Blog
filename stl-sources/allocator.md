@@ -60,7 +60,7 @@ void destroy( pointer p );
 ```
 ## SGI的allocator
 
-按照书里写的，SGI并没有使用自己实现的不完整的allocator。但是从最新代码看，应该是迭代了这部分，现在默认是使用的allocator，但是在配置里提供了几个allocator作为备选：
+按照书里写的，SGI并没有使用自己实现的不完整的allocator。但是从最新代码看，应该是迭代了这部分，现在默认是使用的allocator，但是allocator的基类__allocator_base由配置指定，并且提供了五个可选：
 
 ```shell
   case ${enable_libstdcxx_allocator_flag} in
@@ -86,12 +86,19 @@ void destroy( pointer p );
       ;;
   esac
 ```
+除了rebind外其他的方法都是在基类实现。
 
-## SGI的pool_allocator
+## new_allocator
+new_allocator是最简单的实现，就是对operator new跟operator delete做了简单的封装
+
+## malloc_allocator
+malloc_allocator跟new_allocator的差别就是用malloc/free替换了operator new/delete
+
+## pool_allocator
 
 原文中的SGI两级allocator，在现有版本中被迭代了，作为几种可选的alloc之一的pool_allocator供选择，但是大体实现还是按照书中的介绍。(一些变量名被迭代了，malloc也用operator new替代了，下面按照最新版本)
 
-pool_allocator比较类似slab分配器，在allocator中保留一个_S_free_list，将空闲的内存块存在里面。
+pool_allocator比较类似slab分配器，在allocator中保留一个_S_free_list，将空闲的内存块存在里面
 
 ```cpp
     union _Obj
