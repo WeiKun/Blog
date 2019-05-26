@@ -51,7 +51,7 @@ endif()
 - option(BUILD_GMOCK)以及option(INSTALL_GTEST)，两个选项BUILD_GMOCK跟INSTALL_GTEST，默认都是ON
 - if(BUILD_GMOCK)...endif()根据option选择子项目googlemock还是googletest
 
-==所以根目录的CMakeLists主要就是决定用哪一个子项目。==
+**所以根目录的CMakeLists主要就是决定用哪一个子项目。**
 
 ### 子项目googletest/googlemock/CMakeLists.txt
 文件太长，截断为4个部分逐个分析
@@ -239,7 +239,7 @@ endif()
 ```
 - 这一部分主要是用于配置测试，函数cxx_test也在internal_utils.cmake中，主要是配置一些测试的公共参数，最里面会调用到add_test
 
-==gmock主要的目标是编译并安装gmock跟gmock_main，并且会递归执行gtest==
+**gmock主要的目标是编译并安装gmock跟gmock_main，并且会递归执行gtest**
 
 ### 子项目googletest/googletest/CMakeLists.txt 
 跟gmock差不多，而且太长，就不贴出来了，大致流程：
@@ -258,4 +258,4 @@ endif()
 - 调用install_project
 - 一堆test
 
-==gtest的主要目标是编译并安装gtest跟gtest_main==
+**gtest的主要目标是编译并安装gtest跟gtest_main**
